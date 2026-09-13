@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Vishnu — AI & Data Science student portfolio." />
+  <title>Vishnu | AI & Data Science</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --surface: #111111;
+      --surface-2: #171717;
+      --text: #f5f5f5;
+      --muted: #a3a3a3;
+      --line: #262626;
+      --accent: #ffffff;
+      --max: 1120px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(var(--max), calc(100% - 40px)); margin: auto; }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(16px);
+      background: rgba(10,10,10,.78);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .nav-inner {
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo { font-weight: 800; letter-spacing: -.04em; font-size: 1.15rem; }
+    .nav-links { display: flex; gap: 28px; color: var(--muted); font-size: .9rem; }
+    .nav-links a:hover { color: var(--text); }
+    .menu { display: none; border: 0; background: none; color: white; font-size: 1.4rem; }
+
+    .hero {
+      min-height: calc(100vh - 72px);
+      display: grid;
+      place-items: center;
+      padding: 90px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 520px;
+      height: 520px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,.10), transparent 65%);
+      filter: blur(10px);
+      top: 5%;
+      right: -10%;
+      pointer-events: none;
+    }
+    .eyebrow {
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      font-size: .72rem;
+      font-weight: 700;
+      margin-bottom: 22px;
+    }
+    h1 {
+      font-size: clamp(3.2rem, 8vw, 7.2rem);
+      line-height: .95;
+      letter-spacing: -.075em;
+      max-width: 850px;
+    }
+    .hero p {
+      max-width: 650px;
+      margin: 28px 0 34px;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+    .buttons { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      border-radius: 9px;
+      border: 1px solid var(--line);
+      font-weight: 600;
+      font-size: .9rem;
+      transition: .2s ease;
+    }
+    .btn.primary { background: var(--accent); color: #000; border-color: white; }
+    .btn:hover { transform: translateY(-2px); border-color: #555; }
+    .btn.primary:hover { opacity: .88; }
+
+    section { padding: 110px 0; border-top: 1px solid var(--line); }
+    .section-head {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 30px;
+      margin-bottom: 55px;
+    }
+    .section-number { color: #666; font-size: .8rem; font-weight: 700; }
+    .section-title { font-size: clamp(2rem, 4vw, 3.5rem); letter-spacing: -.055em; line-height: 1; }
+    .section-subtitle { color: var(--muted); margin-top: 14px; max-width: 650px; }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 60px;
+    }
+    .about-copy { font-size: 1.18rem; color: #d4d4d4; }
+    .facts { border-top: 1px solid var(--line); }
+    .fact { padding: 18px 0; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; gap: 20px; }
+    .fact span:first-child { color: var(--muted); }
+    .fact span:last-child { text-align: right; }
+
+    .skills { display: flex; flex-wrap: wrap; gap: 10px; }
+    .skill {
+      border: 1px solid var(--line);
+      background: var(--surface);
+      padding: 10px 14px;
+      border-radius: 999px;
+      color: #d4d4d4;
+      font-size: .88rem;
+    }
+
+    .projects { display: grid; gap: 18px; }
+    .project {
+      display: grid;
+      grid-template-columns: 80px 1fr auto;
+      gap: 25px;
+      align-items: start;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .project:first-child { border-top: 1px solid var(--line); }
+    .project-no { color: #666; font-size: .8rem; padding-top: 4px; }
+    .project h3 { font-size: 1.45rem; letter-spacing: -.035em; margin-bottom: 7px; }
+    .project p { color: var(--muted); max-width: 700px; }
+    .tags { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 14px; }
+    .tag { color: #888; font-size: .75rem; }
+    .project-link { color: #ddd; font-size: .85rem; white-space: nowrap; }
+    .project-link:hover { text-decoration: underline; }
+
+    .timeline { border-top: 1px solid var(--line); }
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 30px;
+      padding: 30px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .date { color: var(--muted); font-size: .85rem; }
+    .timeline-item h3 { font-size: 1.2rem; margin-bottom: 5px; }
+    .timeline-item p { color: var(--muted); }
+
+    .contact-box {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: clamp(28px, 6vw, 70px);
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 30px;
+    }
+    .contact-box h2 { font-size: clamp(2.2rem, 5vw, 4.5rem); line-height: .95; letter-spacing: -.06em; max-width: 650px; }
+    .contact-box p { color: var(--muted); margin-top: 18px; }
+    footer { padding: 35px 0; color: #666; font-size: .8rem; display: flex; justify-content: space-between; gap: 20px; }
+
+    @media (max-width: 760px) {
+      .nav-links { display: none; }
+      .menu { display: block; }
+      .section-head, .about-grid, .timeline-item { grid-template-columns: 1fr; gap: 18px; }
+      .project { grid-template-columns: 45px 1fr; }
+      .project-link { grid-column: 2; }
+      .contact-box { align-items: start; flex-direction: column; }
+      section { padding: 80px 0; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="container nav-inner">
+      <a class="logo" href="#top">V.</a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <button class="menu" aria-label="Open menu" onclick="document.querySelector('.nav-links').classList.toggle('mobile')">☰</button>
+    </div>
+  </nav>
+
+  <main id="top">
+    <header class="hero">
+      <div class="container">
+        <div class="eyebrow">AI & Data Science · Student</div>
+        <h1>Building useful things with data & code.</h1>
+        <p>
+          I'm Vishnu, an AI & Data Science student focused on machine learning,
+          data-driven applications, and software development.
+          This portfolio is a place to showcase my work, skills, and projects.
+        </p>
+        <div class="buttons">
+          <a class="btn primary" href="#projects">View my work ↓</a>
+          <a class="btn" href="https://drive.google.com/file/d/13Pj0ZkydnLSEA8tpHi_OodncpMuwyhKt/view?usp=share_link" target="_blank" rel="noopener">View Resume ↗</a>
+        </div>
+      </div>
+    </header>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-number">01 / ABOUT</div>
+          <div>
+            <h2 class="section-title">A little about me.</h2>
+            <p class="section-subtitle">Replace the placeholder details below with your actual information.</p>
+          </div>
+        </div>
+        <div class="about-grid">
+          <p class="about-copy">
+            I'm an AI & Data Science student who enjoys turning problems into
+            practical software and data solutions. I'm currently developing my
+            skills across programming, databases, machine learning and
+            full-stack development.
+          </p>
+          <div class="facts">
+            <div class="fact"><span>Degree</span><span>AI & Data Science</span></div>
+            <div class="fact"><span>Year</span><span>3rd Year</span></div>
+            <div class="fact"><span>Location</span><span>India</span></div>
+            <div class="fact"><span>Open to</span><span>Internships & Opportunities</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-number">02 / SKILLS</div>
+          <div>
+            <h2 class="section-title">Tools I work with.</h2>
+            <p class="section-subtitle">Keep this list limited to technologies you can actually discuss in an interview.</p>
+          </div>
+        </div>
+        <div class="skills">
+          <span class="skill">Python</span>
+          <span class="skill">Java</span>
+          <span class="skill">SQL</span>
+          <span class="skill">Machine Learning</span>
+          <span class="skill">Data Analysis</span>
+          <span class="skill">Pandas</span>
+          <span class="skill">NumPy</span>
+          <span class="skill">Scikit-learn</span>
+          <span class="skill">Git & GitHub</span>
+          <span class="skill">HTML / CSS</span>
+          <span class="skill">JavaScript</span>
+          <span class="skill">Add your skill</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-number">03 / PROJECTS</div>
+          <div>
+            <h2 class="section-title">Things I've built.</h2>
+            <p class="section-subtitle">Your projects are the most important part of this page for recruiters.</p>
+          </div>
+        </div>
+        <div class="projects">
+          <article class="project">
+            <div class="project-no">01</div>
+            <div>
+              <h3>Your Main Project</h3>
+              <p>Write 2–3 sentences explaining the problem, what you built, your approach, and the result.</p>
+              <div class="tags"><span class="tag">Python</span><span class="tag">Machine Learning</span><span class="tag">SQL</span></div>
+            </div>
+          </article>
+
+          <article class="project">
+            <div class="project-no">02</div>
+            <div>
+              <h3>Your Second Project</h3>
+              <p>Add a concise description that makes it clear what you personally implemented.</p>
+              <div class="tags"><span class="tag">Technology</span><span class="tag">Technology</span></div>
+            </div>
+          </article>
+
+          <article class="project">
+            <div class="project-no">03</div>
+            <div>
+              <h3>Your Third Project</h3>
+              <p>Add another project, research work, or meaningful technical build.</p>
+              <div class="tags"><span class="tag">Technology</span><span class="tag">Technology</span></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-number">04 / EXPERIENCE</div>
+          <div>
+            <h2 class="section-title">Where I've learned.</h2>
+            <p class="section-subtitle">Include internships, research, major college roles, or relevant experience.</p>
+          </div>
+        </div>
+        <div class="timeline">
+          <article class="timeline-item">
+            <div class="date">MONTH 2026 — MONTH 2026</div>
+            <div>
+              <h3>Internship / Role — Company Name</h3>
+              <p>Describe what you worked on, the technologies you used, and the outcome. Quantify results when possible.</p>
+            </div>
+          </article>
+          <article class="timeline-item">
+            <div class="date">2025 — PRESENT</div>
+            <div>
+              <h3>AI & Data Science — College Name</h3>
+              <p>Relevant coursework, academic work, competitions, clubs, or other accomplishments can go here.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="contact-box">
+          <div>
+            <div class="eyebrow">05 / CONTACT</div>
+            <h2>Let's build something.</h2>
+            <p>Replace the links below with your real contact details.</p>
+          </div>
+          <div class="buttons">
+            <a class="btn primary" href="mailto:YOUR_EMAIL@example.com">Email me ↗</a>
+            <a class="btn" href="https://www.linkedin.com/in/vishnu-s-723933290" target="_blank" rel="noopener">LinkedIn ↗</a>
+            <a class="btn" href="https://github.com/shanks-69" target="_blank" rel="noopener">GitHub ↗</a>
+            <a class="btn" href="https://leetcode.com/u/vishnu209" target="_blank" rel="noopener">LeetCode ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container">
+    <span>© 2026 Vishnu</span>
+    <span>Built with HTML & CSS</span>
+  </footer>
+
+  <style>
+    @media (max-width: 760px) {
+      .nav-links.mobile {
+        display: flex;
+        position: absolute;
+        top: 72px;
+        left: 0;
+        right: 0;
+        padding: 18px 20px;
+        flex-direction: column;
+        background: #0a0a0a;
+        border-bottom: 1px solid #262626;
+      }
+    }
+  </style>
+</body>
+</html>
